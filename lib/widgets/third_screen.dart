@@ -47,9 +47,9 @@ class _ThirdScreenState extends State<ThirdScreen> {
                     title: Text('${user['first_name']} ${user['last_name']}'),
                     onTap: () {
                       Navigator.pop(
-                          context,
-                          user[
-                              'first_name']); // Sending back selected user name
+                        context,
+                        '${user['first_name']} ${user['last_name']}',
+                      ); // Sending back the full name of the selected user
                     },
                   );
                 },

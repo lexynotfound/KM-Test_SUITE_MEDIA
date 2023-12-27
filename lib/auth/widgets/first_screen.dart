@@ -6,7 +6,7 @@ class FirstScreen extends StatelessWidget {
   final TextEditingController nameController = TextEditingController();
   final TextEditingController sentenceController = TextEditingController();
 
-  FirstScreen({super.key});
+  FirstScreen({Key? key}) : super(key: key);
 
   bool isPalindrome(String text) {
     // Function to check if a sentence is palindrome or not
@@ -18,7 +18,7 @@ class FirstScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title:const Text('Login')),
+      /* appBar: AppBar(title:const Text('Login')), */
       body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
@@ -33,13 +33,19 @@ class FirstScreen extends StatelessWidget {
           ),
         ),
         child: Padding(
-          padding: const EdgeInsets.all(20.0),
+          padding: const EdgeInsets.all(25.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-              TextField(controller: nameController, decoration: const InputDecoration(labelText: 'Name')),
-              TextField(controller: sentenceController, decoration: const InputDecoration(labelText: 'Sentence')),
+              TextField(
+                  controller: nameController,
+                  decoration: const InputDecoration(labelText: 'Name')),
+              TextField(
+                  controller: sentenceController,
+                  decoration: const InputDecoration(labelText: 'Sentence')),
+              const SizedBox(
+                  height: 20), // Menggunakan const untuk ukuran yang tetap
               ElevatedButton(
                 onPressed: () {
                   String sentence = sentenceController.text;
@@ -48,7 +54,8 @@ class FirstScreen extends StatelessWidget {
                     context: context,
                     builder: (_) => AlertDialog(
                       title: const Text('Palindrome Check'),
-                      content: Text(palindrome ? 'isPalindrome' : 'not palindrome'),
+                      content:
+                          Text(palindrome ? 'isPalindrome' : 'not palindrome'),
                     ),
                   );
                 },
@@ -56,9 +63,13 @@ class FirstScreen extends StatelessWidget {
               ),
               ElevatedButton(
                 onPressed: () {
+                  String nameValue = nameController.text;
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const SecondScreen()),
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          SecondScreen(nameFromFirstScreen: nameValue),
+                    ),
                   );
                 },
                 child: const Text('Next'),
@@ -70,3 +81,4 @@ class FirstScreen extends StatelessWidget {
     );
   }
 }
+
